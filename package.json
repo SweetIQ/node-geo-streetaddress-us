@@ -1,0 +1,27 @@
+{
+  "name": "node-geo-streetaddress-us",
+  "version": "0.1.0",
+  "description": "Node wrapper for perl Geo::StreetAddress::US",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine",
+    "build": "tsc",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "Geo::StreetAddress::US",
+    "perl",
+    "parser",
+    "street",
+    "address"
+  ],
+  "author": "Meng Xuan Xia <mengxuan.xia@outlook.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jasmine": "^2.5.38",
+    "@types/node": "0.0.3",
+    "jasmine": "^2.5.2",
+    "typescript": "^2.1.4"
+  },
+  "dependencies": {}
+}
