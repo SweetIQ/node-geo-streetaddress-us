@@ -13,6 +13,9 @@
     "perl",
     "parser",
     "street",
+    "postal",
+    "zip",
+    "code",
     "address"
   ],
   "author": "Meng Xuan Xia <mengxuan.xia@outlook.com>",
