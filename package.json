@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jasmine",
     "build": "tsc",
+    "install": "cpanm --installdeps .",
     "prepublish": "npm run build"
   },
   "keywords": [

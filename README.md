@@ -9,12 +9,9 @@ This is a NodeJS wrapper for Perl extension [Geo::StreetAddress::US].
 ## Dependencies
 
 - Node.js v6
-- CPAN module JSON and Geo::StreetAddress::US
+- [cpanm]
 
-```bash
-cpanm JSON
-cpanm Geo::StreetAddress::US
-```
+[cpanm]: https://metacpan.org/pod/App::cpanminus
 
 ## Usage
 
