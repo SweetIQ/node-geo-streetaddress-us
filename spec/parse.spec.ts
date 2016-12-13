@@ -1,7 +1,7 @@
 import { parseLocation, parseAddress, parseInformalAddress } from '../index'
 
 describe('parseLocation', () => {
-    it('shoudl parse a correct location', () => {
+    it('should parse a correct location', () => {
         const actual = parseLocation('1005 Gravenstein Hwy N, Sebastopol CA 95272')
         const expected = {
             suffix: 'N',
@@ -17,7 +17,7 @@ describe('parseLocation', () => {
 })
 
 describe('parseAddress', () => {
-    it('shoudl parse a correct address', () => {
+    it('should parse a correct address', () => {
         const actual = parseAddress('1005 Gravenstein Hwy N, Sebastopol CA 95272')
         const expected = {
             suffix: 'N',
@@ -33,7 +33,7 @@ describe('parseAddress', () => {
 })
 
 describe('parseInformalAddress', () => {
-    it('shoudl parse a correct informal address', () => {
+    it('should parse a correct informal address', () => {
         const actual = parseInformalAddress('1025 Gravenstein hwy north Sebastopol CA 95272-3092')
         const expected = {
             suffix: 'N',

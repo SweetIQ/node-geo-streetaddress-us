@@ -1,6 +1,10 @@
-import * as zmq from 'zmq'
 import { spawn, spawnSync } from 'child_process'
 
+/**
+ * Object representing an address
+ * 
+ * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#ADDRESS_SPECIFIER
+ */
 export interface AddressSpecifier {
     number: string;
     prefix: string;
@@ -14,6 +18,11 @@ export interface AddressSpecifier {
     sec_unit_num: string;
 }
 
+/**
+ * Object representing an intersection
+ * 
+ * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#INTERSECTION_SPECIFIER
+ */
 export interface IntersectionSpecifier {
     prefix1: string;
     prefix2: string;
@@ -30,7 +39,12 @@ export interface IntersectionSpecifier {
 
 export type Specifier = AddressSpecifier | IntersectionSpecifier;
 
-function foreignSpawn(command: string, address: string) {
+export type Command = 'parseLocation' | 'parseAddress' | 'parseInformalAddress';
+
+/**
+ * Spawn foreign perl code to parse address.
+ */
+function foreignSpawn(command: Command, address: string) {
     return spawnSync('perl', [
         'foreign/GeoStreetAddressRPC.pl',
         command,
@@ -40,6 +54,11 @@ function foreignSpawn(command: string, address: string) {
     })
 }
 
+/**
+ * Parses any address or intersection string and returns the appropriate specifier. 
+ * 
+ * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_location
+ */
 export function parseLocation(address: string): Partial<Specifier> {
     let ret = foreignSpawn('parseLocation', address)
     if (ret.error) {
@@ -49,6 +68,11 @@ export function parseLocation(address: string): Partial<Specifier> {
     }
 }
 
+/**
+ * Parses formal address string and returns the appropriate specifier. 
+ * 
+ * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_address
+ */
 export function parseAddress(address: string): Partial<AddressSpecifier> {
     let ret = foreignSpawn('parseAddress', address)
     if (ret.error) {
@@ -58,6 +82,11 @@ export function parseAddress(address: string): Partial<AddressSpecifier> {
     }
 }
 
+/**
+ * Parses informal address string and returns the appropriate specifier. 
+ * 
+ * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_informal_address
+ */
 export function parseInformalAddress(address: string): Partial<AddressSpecifier> {
     let ret = foreignSpawn('parseInformalAddress', address)
     if (ret.error) {

@@ -17,11 +17,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jasmine": "^2.5.38",
-    "@types/zmq": "0.0.20",
     "jasmine": "^2.5.2",
     "typescript": "^2.1.4"
   },
   "dependencies": {
-    "zmq": "^2.15.3"
   }
 }
