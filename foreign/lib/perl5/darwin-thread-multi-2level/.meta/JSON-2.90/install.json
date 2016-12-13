@@ -1,1 +1,0 @@
-{"target":"JSON","pathname":"M/MA/MAKAMAKA/JSON-2.90.tar.gz","name":"JSON","dist":"JSON-2.90","provides":{"JSON::Boolean":{"version":"2.90","file":"lib/JSON.pm"},"JSON::Backend::PP":{"version":"2.90","file":"lib/JSON.pm"},"JSON":{"version":"2.90","file":"lib/JSON.pm"}},"version":"2.90"}
