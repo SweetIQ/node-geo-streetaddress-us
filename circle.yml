@@ -1,7 +1,3 @@
 machine:
   node:
     version: 6.4.0
-dependencies:
-  pre:
-    - curl -L https://cpanmin.us | perl - --sudo App::cpanminus local::lib
-    - echo 'eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`' >> ~/.bashrc

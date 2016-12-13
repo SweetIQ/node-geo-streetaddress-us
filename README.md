@@ -9,7 +9,7 @@ This is a NodeJS wrapper for Perl extension [Geo::StreetAddress::US].
 ## Dependencies
 
 - Node.js v6
-- [cpanm]
+- Perl 5
 
 [cpanm]: https://metacpan.org/pod/App::cpanminus
 
