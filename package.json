@@ -4,7 +4,8 @@
   "description": "Node wrapper for perl Geo::StreetAddress::US",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "build": "tsc"
   },
   "keywords": [
     "Geo::StreetAddress::US",
