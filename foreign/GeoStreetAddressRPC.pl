@@ -1,4 +1,8 @@
 #! /usr/bin/perl
+
+# Dpenedencies were bundled using command
+# cpanm --self-contained -L foreign JSON Geo::StreetAddress::US
+
 use strict;
 use lib './foreign/lib/perl5';
 use Geo::StreetAddress::US;
