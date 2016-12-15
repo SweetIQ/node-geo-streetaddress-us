@@ -1,5 +1,9 @@
 # geo-streetaddress-us
 
+[![npm](https://img.shields.io/npm/v/geo-streetaddress-us.svg)](https://www.npmjs.com/package/geo-streetaddress-us)
+[![GitHub tag](https://img.shields.io/github/tag/SweetIQ/node-geo-streetaddress-us.svg)](https://github.com/SweetIQ/node-geo-streetaddress-us)
+[![CircleCI branch](https://img.shields.io/circleci/project/github/SweetIQ/node-geo-streetaddress-us/master.svg)](https://circleci.com/gh/SweetIQ/node-geo-streetaddress-us)
+
 This is a NodeJS wrapper for Perl extension [Geo::StreetAddress::US].
 
 > Geo::StreetAddress::US is a regex-based street address and street intersection parser for the United States. Its basic goal is to be as forgiving as possible when parsing user-provided address strings. 
