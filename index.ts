@@ -51,6 +51,7 @@ function foreignSpawn(command: Command, address: string) {
         command,
         address,
         ], {
+        cwd: __dirname,
         encoding: 'buffer'
     })
 
