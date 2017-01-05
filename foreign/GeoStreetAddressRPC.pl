@@ -5,6 +5,7 @@
 
 use strict;
 use lib './foreign/lib/perl5';
+use lib './lib/perl5';
 use Geo::StreetAddress::US;
 use JSON;
 
