@@ -52,7 +52,8 @@ function foreignSpawn(command: Command, address: string) {
         address,
         ], {
         cwd: __dirname,
-        encoding: 'buffer'
+        encoding: 'buffer',
+        timeout: 30 * 1000
     })
 
     if (foreign.stderr.toString('utf8')) {
