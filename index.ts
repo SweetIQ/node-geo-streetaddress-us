@@ -1,4 +1,4 @@
-import { spawn, spawnSync } from 'child_process'
+import { spawnSync } from 'child_process'
 import * as path from 'path'
 
 /**
@@ -46,7 +46,7 @@ export type Command = 'parseLocation' | 'parseAddress' | 'parseInformalAddress';
  * Spawn foreign perl code to parse address.
  */
 function foreignSpawn(command: Command, address: string) {
-    let foreign =  spawnSync('perl', [
+    return spawnSync('perl', [
         path.join(__dirname, 'foreign/GeoStreetAddressRPC.pl'),
         command,
         address,
@@ -54,14 +54,7 @@ function foreignSpawn(command: Command, address: string) {
         cwd: __dirname,
         encoding: 'buffer',
         timeout: 30 * 1000
-    })
-
-    if (foreign.stderr.toString('utf8')) {
-        foreign.error = new Error('Non-empty stderr')
-    }
-
-    return foreign
-    
+    });
 }
 
 /**
@@ -70,9 +63,11 @@ function foreignSpawn(command: Command, address: string) {
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_location
  */
 export function parseLocation(address: string): Partial<Specifier> {
-    let ret = foreignSpawn('parseLocation', address)
+    let ret = foreignSpawn('parseLocation', address);
     if (ret.error) {
-        throw new Error(`Failed to parse location\n${ret.stdout}\n${ret.stderr}]`)
+        const error = new Error('Failed to parse location');
+        error.stack = ret.error.stack;
+        throw error;
     } else {
         return JSON.parse((ret.stdout.toString('utf8')))
     }
@@ -84,9 +79,11 @@ export function parseLocation(address: string): Partial<Specifier> {
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_address
  */
 export function parseAddress(address: string): Partial<AddressSpecifier> {
-    let ret = foreignSpawn('parseAddress', address)
+    let ret = foreignSpawn('parseAddress', address);
     if (ret.error) {
-        throw new Error(`Failed to parse address \n${ret.stdout}\n${ret.stderr}]`)
+        const error = new Error('Failed to parse address');
+        error.stack = ret.error.stack;
+        throw error;
     } else {
         return JSON.parse((ret.stdout.toString('utf8')))
     }
@@ -98,9 +95,11 @@ export function parseAddress(address: string): Partial<AddressSpecifier> {
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_informal_address
  */
 export function parseInformalAddress(address: string): Partial<AddressSpecifier> {
-    let ret = foreignSpawn('parseInformalAddress', address)
+    let ret = foreignSpawn('parseInformalAddress', address);
     if (ret.error) {
-        throw new Error(`Failed to parse informal address\n${ret.stdout}\n${ret.stderr}]`)
+        const error = new Error('Failed to parse informal address');
+        error.stack = ret.error.stack;
+        throw error;
     } else {
         return JSON.parse((ret.stdout.toString('utf8')))
     }
