@@ -1,4 +1,4 @@
-import { spawn, spawnSync } from 'child_process'
+import { spawnSync } from 'child_process'
 import * as path from 'path'
 
 /**
@@ -46,7 +46,7 @@ export type Command = 'parseLocation' | 'parseAddress' | 'parseInformalAddress';
  * Spawn foreign perl code to parse address.
  */
 function foreignSpawn(command: Command, address: string) {
-    let foreign =  spawnSync('perl', [
+    return spawnSync('perl', [
         path.join(__dirname, 'foreign/GeoStreetAddressRPC.pl'),
         command,
         address,
@@ -54,14 +54,7 @@ function foreignSpawn(command: Command, address: string) {
         cwd: __dirname,
         encoding: 'buffer',
         timeout: 30 * 1000
-    })
-
-    if (foreign.stderr.toString('utf8')) {
-        foreign.error = new Error('Non-empty stderr')
-    }
-
-    return foreign
-    
+    });
 }
 
 /**
