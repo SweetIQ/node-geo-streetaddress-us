@@ -58,6 +58,18 @@ function foreignSpawn(command: Command, address: string) {
 }
 
 /**
+ * Parse child process stdout to JSON
+ */
+function parseStdoutToJson(stdout: Buffer) {
+    const stdoutString = stdout.toString('utf8').trim();
+    if (stdoutString) {
+        return JSON.parse(stdoutString);
+    } else {
+        throw new Error('Geo-StreetAddress-US was not able to parse the given address or location');
+    }
+}
+
+/**
  * Parses any address or intersection string and returns the appropriate specifier. 
  * 
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_location
@@ -69,7 +81,7 @@ export function parseLocation(address: string): Partial<Specifier> {
         error.stack = ret.error.stack;
         throw error;
     } else {
-        return JSON.parse((ret.stdout.toString('utf8')))
+        return parseStdoutToJson(ret.stdout);
     }
 }
 
@@ -85,7 +97,7 @@ export function parseAddress(address: string): Partial<AddressSpecifier> {
         error.stack = ret.error.stack;
         throw error;
     } else {
-        return JSON.parse((ret.stdout.toString('utf8')))
+        return parseStdoutToJson(ret.stdout);
     }
 }
 
@@ -101,6 +113,6 @@ export function parseInformalAddress(address: string): Partial<AddressSpecifier>
         error.stack = ret.error.stack;
         throw error;
     } else {
-        return JSON.parse((ret.stdout.toString('utf8')))
+        return parseStdoutToJson(ret.stdout);
     }
 }
