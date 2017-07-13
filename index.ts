@@ -75,6 +75,9 @@ function parseStdoutToJson(stdout: Buffer) {
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_location
  */
 export function parseLocation(address: string): Partial<Specifier> {
+    if (!address) {
+        throw new Error('Empty address provided');
+    }
     let ret = foreignSpawn('parseLocation', address);
     if (ret.error) {
         const error = new Error('Failed to parse location');
@@ -91,6 +94,9 @@ export function parseLocation(address: string): Partial<Specifier> {
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_address
  */
 export function parseAddress(address: string): Partial<AddressSpecifier> {
+    if (!address) {
+        throw new Error('Empty address provided');
+    }
     let ret = foreignSpawn('parseAddress', address);
     if (ret.error) {
         const error = new Error('Failed to parse address');
@@ -107,6 +113,9 @@ export function parseAddress(address: string): Partial<AddressSpecifier> {
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_informal_address
  */
 export function parseInformalAddress(address: string): Partial<AddressSpecifier> {
+    if (!address) {
+        throw new Error('Empty address provided');
+    }
     let ret = foreignSpawn('parseInformalAddress', address);
     if (ret.error) {
         const error = new Error('Failed to parse informal address');
