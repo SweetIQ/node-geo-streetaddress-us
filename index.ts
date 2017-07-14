@@ -58,18 +58,33 @@ function foreignSpawn(command: Command, address: string) {
 }
 
 /**
+ * Parse child process stdout to JSON
+ */
+function parseStdoutToJson(stdout: Buffer) {
+    const stdoutString = stdout.toString('utf8').trim();
+    if (stdoutString) {
+        return JSON.parse(stdoutString);
+    } else {
+        throw new Error('Geo-StreetAddress-US was not able to parse the given address or location');
+    }
+}
+
+/**
  * Parses any address or intersection string and returns the appropriate specifier. 
  * 
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_location
  */
 export function parseLocation(address: string): Partial<Specifier> {
+    if (!address) {
+        throw new Error('Empty address provided');
+    }
     let ret = foreignSpawn('parseLocation', address);
     if (ret.error) {
         const error = new Error('Failed to parse location');
         error.stack = ret.error.stack;
         throw error;
     } else {
-        return JSON.parse((ret.stdout.toString('utf8')))
+        return parseStdoutToJson(ret.stdout);
     }
 }
 
@@ -79,13 +94,16 @@ export function parseLocation(address: string): Partial<Specifier> {
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_address
  */
 export function parseAddress(address: string): Partial<AddressSpecifier> {
+    if (!address) {
+        throw new Error('Empty address provided');
+    }
     let ret = foreignSpawn('parseAddress', address);
     if (ret.error) {
         const error = new Error('Failed to parse address');
         error.stack = ret.error.stack;
         throw error;
     } else {
-        return JSON.parse((ret.stdout.toString('utf8')))
+        return parseStdoutToJson(ret.stdout);
     }
 }
 
@@ -95,12 +113,15 @@ export function parseAddress(address: string): Partial<AddressSpecifier> {
  * Mirror of http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm#parse_informal_address
  */
 export function parseInformalAddress(address: string): Partial<AddressSpecifier> {
+    if (!address) {
+        throw new Error('Empty address provided');
+    }
     let ret = foreignSpawn('parseInformalAddress', address);
     if (ret.error) {
         const error = new Error('Failed to parse informal address');
         error.stack = ret.error.stack;
         throw error;
     } else {
-        return JSON.parse((ret.stdout.toString('utf8')))
+        return parseStdoutToJson(ret.stdout);
     }
 }
